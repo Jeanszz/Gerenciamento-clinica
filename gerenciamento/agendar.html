@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+ <head>
+	<link rel="stylesheet" href="style.css">
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title>Agendar</title>
+
+ </head>
+
+<body>
+   
+<header class="main_header container">        
+    <div class="content">
+    
+        <div class="main_header_logo">
+            <a href="" target="_blank"><img src="img/agenda.png" alt="logo.png" title="Agendar"/></a>
+        </div>
+    
+    </div>
+</header>
+
+<main class="main_content container">
+        
+    <section class="section-seu-codigo container">
+        
+        <div class="content">
+            
+            <h1 class="section_title"> Menu Agendamento</h1>
+            
+            <div class="box-artigo">
+                <!-- chamando menu de navegação -->
+                <nav class="menu">
+                  
+                    <ul>
+                  
+                        <li><a href="inicial.html"  class="ativo">Home</a></li>
+                        <li><a href="cadastrar.html">Cadastrar</a></li>
+                        <li><a href="gerenciar.php" >Editar</a></li>
+                        <li><a href="agendar.html" >Agendar</a></li>
+                        <li><a href="visualizar.php" >Visualizar</a></li>
+                        <li><a href="index.html" >Sair</a></li>
+                        
+                  
+                    </ul>
+
+                </nav>
+
+            </div><!--Box Artigo-->
+
+
+            <div class="clear"></div>
+            <form action="cadastrar_agendamento.php" method="post">
+                <label for="nome_paciente">Nome do Paciente:</label>
+                <input type="text" name="nome_paciente" id="autocomplete_paciente" required>
+            
+                <label for="nome_medico">Nome do Médico:</label>
+                <input type="text" name="nome_medico" id="autocomplete_medico" required>
+            
+                <label for="data_agendamento">Data do Agendamento:</label>
+                <input type="date" name="data_agendamento" required>
+            
+                <label for="hora_agendamento">Hora do Agendamento:</label>
+                <input type="time" name="hora_agendamento" required>
+            
+                <label for="status_agendamento">Status do Agendamento:</label>
+                <select name="status_agendamento" required>
+                    <option value="Agendado">Agendado</option>
+                    <option value="Cancelado">Cancelado</option>
+                    <!-- Adicione mais opções conforme necessário -->
+                </select>
+            
+                <button type="submit" style="width: 100%;
+                                            background-color: #614caf;
+                                            color: white;
+                                            padding: 10px 15px;
+                                            border: none;
+                                            border-radius: 5px;">
+                    Agendar Consulta
+                </button>
+            
+                <script>
+                    // Adicionando funcionalidade de sugestão automática para paciente
+                    var pacientes = ["Nome do Paciente 1", "Nome do Paciente 2"]; // Substitua com os dados reais do seu sistema
+                    autocomplete(document.getElementById("autocomplete_paciente"), pacientes);
+            
+                    // Adicionando funcionalidade de sugestão automática para médico
+                    var medicos = ["Nome do Médico 1", "Nome do Médico 2"]; // Substitua com os dados reais do seu sistema
+                    autocomplete(document.getElementById("autocomplete_medico"), medicos);
+            
+                    function autocomplete(inp, arr) {
+                        var currentFocus;
+            
+                        inp.addEventListener("input", function (e) {
+                            var a, b, i, val = this.value;
+                            closeAllLists();
+                            if (!val) { return false; }
+                            currentFocus = -1;
+            
+                            a = document.createElement("div");
+                            a.setAttribute("id", this.id + "autocomplete-list");
+                            a.setAttribute("class", "autocomplete-items");
+                            this.parentNode.appendChild(a);
+            
+                            for (i = 0; i < arr.length; i++) {
+                                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                                    b = document.createElement("div");
+                                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                                    b.innerHTML += arr[i].substr(val.length);
+                                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                                    b.addEventListener("click", function (e) {
+                                        inp.value = this.getElementsByTagName("input")[0].value;
+                                        closeAllLists();
+                                    });
+                                    a.appendChild(b);
+                                }
+                            }
+                        });
+            
+                        function closeAllLists(elmnt) {
+                            var x = document.getElementsByClassName("autocomplete-items");
+                            for (var i = 0; i < x.length; i++) {
+                                if (elmnt != x[i] && elmnt != inp) {
+                                    x[i].parentNode.removeChild(x[i]);
+                                }
+                            }
+                        }
+            
+                        document.addEventListener("click", function (e) {
+                            closeAllLists(e.target);
+                        });
+                    }
+                </script>
+            </form>
+    </div>
+    </section><!--FECHA BOX HTML-->
+
+
+</main>
+
+<footer class="main_footer container">
+    <div class="main_footer_copy">
+
+       
+    
+    </div>
+</footer>
+
+<script src="js/jquery.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
